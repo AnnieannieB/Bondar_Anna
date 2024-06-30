@@ -45,9 +45,10 @@ def classify_house(floor_count: int) -> str:
 
     if floor_count <= limit1:
         return "Малоэтажный"
-    if floor_count <= limit2:
+    elif floor_count <= limit2:
         return "Среднеэтажный"
-    return "Многоэтажный"
+    else:
+        return "Многоэтажный"
 
 
 # классифицирует дома на основе количества этажей и возвращает список категорий
@@ -89,11 +90,7 @@ def min_area_residential(houses: list[dict]) -> str:
     :param houses: Список словарей с данными о домах.
     :return: Адрес дома с наименьшим средним количеством квадратных метров жилой площади на одного жильца.
     """
-    avg_areas = []
-
-    for house in houses:
-        avg_area_per_resident = house["area_residential"] / house["population"]
-        avg_areas.append(avg_area_per_resident)
+    avg_areas = [house["area_residential"] / house["population"] for house in houses]
 
     min_avg_area = min(avg_areas)
     min_area_index = avg_areas.index(min_avg_area)
